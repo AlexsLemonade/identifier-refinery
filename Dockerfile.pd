@@ -1,0 +1,22 @@
+FROM convert/base
+
+WORKDIR /home/user
+
+USER root
+COPY R/install_pd.R .
+
+ARG package
+ENV PACKAGE=$package
+
+ARG db
+ENV DB=$db
+
+RUN Rscript install_pd.R
+
+VOLUME /home/user/data
+
+COPY convert.R .
+
+USER user
+
+ENTRYPOINT []

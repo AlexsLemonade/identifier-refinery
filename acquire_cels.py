@@ -65,3 +65,4 @@ for pair in brainset:
                         break
             except Exception as e:
                 print(e)
+        break

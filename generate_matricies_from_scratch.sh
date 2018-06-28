@@ -9,3 +9,5 @@ python acquire_cels.py
 # Build the base image
 docker build -t "convert/base" -f Dockerfile.base .
 
+# Build the image and build a conversion matrix for each cel
+python build_and_convert.py
