@@ -9,7 +9,7 @@ This repository is used to build matricies which can convert between different g
 
 These conversion matricies are built by:
 
- * Manually choosing random raw CEL files from NCBI GEO for a given platform accession code (in `/cels`)
+ * Randomly choosing raw CEL files from NCBI GEO for a given platform accession code (in `/cels`)
  * Reading the CEL header and joining Brainarray (e.g., `hgu133plus2hsensgprobe`) and Bioconductor (e.g., `hgu133plus2.db`) (x, y) coordinates
  * Finding intersecting probe identifiers
  * Extracting supported identifiers and probe IDs from the Bioconductor package
