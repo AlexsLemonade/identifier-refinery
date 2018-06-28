@@ -15,7 +15,7 @@ RUN Rscript install_pd.R
 
 VOLUME /home/user/data
 
-COPY convert.R .
+COPY R/convert.R .
 
 USER user
 

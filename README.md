@@ -24,13 +24,13 @@ The `cels` directory contains raw CEL files taken from GEO. The list of supporte
 
 ### Docker Image
 
-The conversion scripts are run on Docker images. 
+The conversion scripts are run on custom Docker images. 
 
-Dockerfiles are provided in this repository.
+Two Dockerfiles are provided in this repository - `base` Docker image, which is used to install the quire R dependancies, and the `pd` image, which is used to build the required databases for a given platform.
 
 ### Conversion Scripts
 
-[ .. ]
+A `build_and_convert.py` script is provided, which build a unique Docker image for each package, mount the downloaded CEL files as a volume, and then run the gene conversion script `R/gene_convert.R` inside the image and output the master conversion matrix.
 
 ## Reproducing
 
