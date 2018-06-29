@@ -49,9 +49,11 @@ out_file_path <- opt$outputFile
 # Does platform in CEL header match platform passed as an argument?
 header_platform <- unlist(affyio::read.celfile.header(cel_path)[1])
 header_platform <- tolower(gsub("[[:punct:]]", "", header_platform))
-# if not, throw error
+# if not, warn error
 if (header_platform != platform) {
-  stop("CEL file header does not match platform argument")
+  message("XXXXXXX")
+  message(paste0("WARNING! CEL file header ", header_platform, " does not match platform argument ", platform),"!")
+  message("XXXXXXX")
 }
 
 # load brainarray package
@@ -93,7 +95,7 @@ ba_probe_ensg_df <- dplyr::inner_join(probe_info_df, brainarray_df,
 supported_identifiers <- c("SYMBOL", "ENTREZID", "UNIGENE", "ENSEMBL",
                            "REFSEQ")
 # only those that are actually supported by the package
-message("Interesectiong..")
+message("Interesectioning..")
 supported_identifiers <- base::intersect(supported_identifiers, 
                                          keytypes(get(db_package_name)))
 

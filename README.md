@@ -15,6 +15,7 @@ These conversion matricies are built by:
  * Extracting supported identifiers and probe IDs from the Bioconductor package
  * Filtering on probe IDs and Ensembl Gene IDs in Brainarray
  * Writing the output to a conversion TSV file
+ * Check that all output conversion TSV files have a shared SHA1
 
 ## Repository Contents
 
@@ -38,6 +39,12 @@ The entire process can be reproduced by running the following command script fro
 
 ```
 $ ./generate_matricies_from_scratch.sh
+```
+
+You can also choose to only build a specific platform, ex.,:
+
+```
+$ ./generate_matricies_from_scratch.sh celegans
 ```
 
 ## Identifiers

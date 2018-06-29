@@ -1,4 +1,12 @@
+import hashlib
 import os
+import sys
+
+try:
+  from pathlib import Path
+except ImportError:
+  from pathlib2 import Path  # python 2 backport
+
 
 ba_pd = {'bovgene10st': 'pd.bovgene.1.0.st_3.12.0.tar.gz',
  'bovgene11st': 'pd.bovgene.1.1.st_3.12.0.tar.gz',
@@ -181,7 +189,16 @@ probesets = [
     "rta10"
 ]
 
+try:
+    target = sys.argv[1]
+except IndexError:
+    target = None
+
 for brainarray, pd in ba_pd.items():
+
+    if target:
+        if brainarray != target:
+            continue
 
     try:
         tag = "convert/" + brainarray
@@ -197,10 +214,14 @@ for brainarray, pd in ba_pd.items():
         print(build_s)
         os.system(build_s)
 
+        # Ensure output directory exists
+        Path(os.getcwd() + '/cels/out').mkdir(exist_ok=True)
+        Path(os.getcwd() + '/cels/out/' + brainarray).mkdir(exist_ok=True)
+
         # Run the conversion script in the docker image.
         for celfile in os.listdir(os.getcwd() + '/cels/' + brainarray):
-            run_s = (    'docker run -it ' + '-v /Users/rjones/Projects/gene-converter/cels:/home/user/data/ ' + tag  
-                        + " Rscript convert.R -p " + brainarray + " -o " + "/home/user/data/out/"
+            run_s = (    'docker run -it ' + '-v ' + os.getcwd() + '/cels:/home/user/data/ ' + tag  
+                        + " Rscript convert.R -p " + brainarray + " -o " + "/home/user/data/out/" + brainarray
                         + " -i /home/user/data/" + brainarray + "/" + celfile + " -d " + database + " -s " + ba_sp[brainarray].lower()
                         + " -g " + celfile.split('.')[0]
                     )
@@ -208,10 +229,28 @@ for brainarray, pd in ba_pd.items():
             print(run_s)
             os.system(run_s)
 
+        BUF_SIZE = 65536
+        hashes = []
+        for outfile in os.listdir(os.getcwd() + '/cels/out/' + brainarray + '/'):
+            sha1 = hashlib.sha1()
+            data = None
+            with open(os.getcwd() + '/cels/out/' + brainarray + '/' + outfile, 'rb') as f:
+                while True:
+                    data = f.read(BUF_SIZE)
+                    if not data:
+                        break
+                    sha1.update(data)
+            hashes.append(sha1.hexdigest())
+
+        unique_hashes = set(hashes)
+        if len(unique_hashes) is 1:
+            print("Success! All files have matching SHA1 hash: " + str(hashes[0]))
+        else:
+            print("WARNING! Output file hash mismatch!") 
+            print(hashes)
+
     except Exception as e:
-        print("XXX")
-        print("X")
-        print("X Error while converting " + brainarray)
+        print("XXXXXXXXX")
+        print("Error while converting " + brainarray)
         print(e)
-        print("X")
-        print("XXXXXXX")
+        print("XXXXXXXXX")

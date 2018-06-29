@@ -2,6 +2,7 @@ import csv
 import GEOparse
 import os
 import random
+import sys
 import urllib
 
 try:
@@ -9,6 +10,10 @@ try:
 except ImportError:
   from pathlib2 import Path  # python 2 backport
 
+try:
+    target = sys.argv[1]
+except IndexError:
+    target = None
 
 brainset = []
 with open('supported_microarray_platforms.csv', 'r') as csv_in:
@@ -19,7 +24,13 @@ with open('supported_microarray_platforms.csv', 'r') as csv_in:
 
         # This _is_ a supported platform.
         if row[2] == "y":
-            brainset.append((row[0], row[1]))
+            if target:
+                if target == row[0]:
+                    brainset.append((row[0], row[1]))
+                else:
+                    continue
+            else:
+                brainset.append((row[0], row[1]))
 
 # Ensure uniqueness
 brainset = list(set(brainset))
@@ -31,7 +42,7 @@ for pair in brainset:
     # This is a GEO GPL, not an Array Express accession.
     if '-' not in accession:
 
-    	# Skip platforms we have already platform.
+        # Skip platforms we have already platform.
         path = 'cels/' + brainarray_package + '/'
         if os.path.exists(path):
             print("Skipping existing platform " + brainarray_package)
