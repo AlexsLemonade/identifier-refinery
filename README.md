@@ -31,7 +31,7 @@ Two Dockerfiles are provided in this repository - `base` Docker image, which is 
 
 ### Conversion Scripts
 
-A `build_and_convert.py` script is provided, which build a unique Docker image for each package, mount the downloaded CEL files as a volume, and then run the gene conversion script `R/gene_convert.R` inside the image and output the master conversion matrix.
+A `build_and_convert.py` script is provided, which build a unique Docker image for each package, mount the downloaded CEL files as a volume, and then run the gene conversion script `R/gene_convert.R` inside the image and output the master conversion matrix. Output TSV files live in `cels/out/`.
 
 ## Reproducing
 

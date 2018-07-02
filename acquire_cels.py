@@ -75,5 +75,6 @@ for pair in brainset:
                         urllib.urlretrieve(ffile, path + gid + "_" + ffile.split('/')[-1])
                         break
             except Exception as e:
+                print(pair)
                 print(e)
-        break
+                break
