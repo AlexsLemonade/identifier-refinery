@@ -16,6 +16,8 @@ RUN Rscript install_pd.R
 VOLUME /home/user/data
 
 COPY R/convert.R .
+COPY R/custom_hthgu133pluspm.R .
+COPY R/custom_htmg430a.R .
 
 USER user
 

@@ -6,6 +6,9 @@ install_with_url <- function(main_url, packages) {
 
 source("https://bioconductor.org/biocLite.R")
 biocLite(paste0(Sys.getenv("DB"), '.db'))
+biocLite('pd.ht.hg.u133.plus.pm')
+biocLite('pd.ht.mg.430a')
+biocLite("htmg430aprobe")
 
 annotation_url <- 'https://bioconductor.org/packages/3.6/data/annotation/src/contrib/'
 pd_annotation_pkgs <- c(

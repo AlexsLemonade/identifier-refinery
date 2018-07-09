@@ -45,8 +45,6 @@ ba_pd = {'bovgene10st': 'pd.bovgene.1.0.st_3.12.0.tar.gz',
  'hgu95e': 'pd.hg.u95e_3.12.0.tar.gz',
  'hta20': 'pd.hta.2.0_3.12.2.tar.gz',
  'hthgu133a': 'pd.ht.hg.u133a_3.12.0.tar.gz',
- 'hthgu133pluspm': 'pd.ht.hg.u133.plus.pm_3.12.0.tar.gz',
- 'htmg430a': 'pd.ht.mg.430a_3.12.0.tar.gz',
  'hugene10st': 'pd.hugene.1.0.st.v1_3.14.1.tar.gz',
  'hugene11st': 'pd.hugene.1.1.st.v1_3.14.1.tar.gz',
  'hugene20st': 'pd.hugene.2.0.st_3.14.1.tar.gz',
@@ -88,6 +86,11 @@ ba_pd = {'bovgene10st': 'pd.bovgene.1.0.st_3.12.0.tar.gz',
  'zebrafish': 'pd.zebrafish_3.12.0.tar.gz'
 }
 
+customs = {
+	'hthgu133pluspm': 'pd.ht.hg.u133.plus.pm',
+	'htmg430a': 'pd.ht.mg.430a'
+}
+
 ba_sp = {'bovgene10st': 'Bt',
  'bovgene11st': 'Bt',
  'bovine': 'Bt',
@@ -126,7 +129,7 @@ ba_sp = {'bovgene10st': 'Bt',
  'hta20': 'Hs',
  'hthgu133a': 'Hs',
  'hthgu133pluspm': 'Hs',
- 'htmg430a': 'Hs',
+ 'htmg430a': 'Mm',
  'hugene10st': 'Hs',
  'hugene11st': 'Hs',
  'hugene20st': 'Hs',
@@ -194,6 +197,7 @@ try:
 except IndexError:
     target = None
 
+# Do the bulk
 for brainarray, pd in ba_pd.items():
 
     if target:
@@ -254,3 +258,20 @@ for brainarray, pd in ba_pd.items():
         print("Error while converting " + brainarray)
         print(e)
         print("XXXXXXXXX")
+
+# These are special cases
+for custom, pd in customs.items():
+    tag = "convert/" + custom
+    build_s = 'docker build -t ' + tag + " --build-arg package=" + pd + " -f Dockerfile.pd ."
+    print("Building image: ")
+    print(build_s)
+    os.system(build_s)
+
+    custom_script = "custom_" + custom + ".R"
+    run_s = (    'docker run -it ' + '-v ' + os.getcwd() + '/cels:/home/user/data/ '  
+                + tag + " Rscript " + custom_script
+            )
+    print("Running conversion: ")
+    print(run_s)
+    os.system(run_s)
+
