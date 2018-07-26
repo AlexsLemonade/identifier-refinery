@@ -65,7 +65,7 @@ for pair in brainset:
         random.shuffle(keys)
 
         # Get five samples per platform.
-        for i in range(0,5):
+        for i in range(0,2):
             try:
                 gid = keys[i]
                 gse = GEOparse.get_GEO(gid, how='brief', destdir='/tmp')
