@@ -36,6 +36,7 @@ with open('supported_microarray_platforms.csv', 'r') as csv_in:
 brainset = list(set(brainset))
 
 for pair in brainset:
+
     brainarray_package = pair[0] # ex, `bovgene10st`
     accession = pair[1] # ex, `GPL16500`
 
