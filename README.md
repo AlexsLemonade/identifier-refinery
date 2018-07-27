@@ -1,5 +1,5 @@
 ![](https://i.imgur.com/GphUr2m.png)
-# identifier-refinery [![](https://zenodo.org/badge/DOI/10.5281/zenodo.1322711.svg](https://zenodo.org/record/1322711)
+# identifier-refinery [![](https://zenodo.org/badge/DOI/10.5281/zenodo.1322711.svg)](https://zenodo.org/record/1322711)
 
 Tools and assets for easy and reproducable gene identifier conversion.
 
