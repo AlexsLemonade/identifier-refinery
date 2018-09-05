@@ -65,8 +65,12 @@ for (col_name in sep_cols) {
 # master
 master_df <- dplyr::left_join(x = ba_probe_ensg_df, y = gpl_df, by = "PROBEID")
 
-# output file, using the path supplied as an argument
-output_file <- file.path("/home/user/data/out/hthgu133pluspm/", paste0("hthgu133pluspm_master_conversion.tsv.gz"))
+output_dir <- "/home/user/data/out/hthgu133pluspm"
+if (!dir.exists(output_dir)) {
+  dir.create(output_dir)
+}
+output_file <- file.path(output_dir, "hthgu133pluspm_master_conversion.tsv.gz")
+
 # write compressed file
 message("Writing outfile..")
 readr::write_tsv(master_df, 
