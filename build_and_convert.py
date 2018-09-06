@@ -172,7 +172,6 @@ ba_sp = {'bovgene10st': 'Bt',
 }
 transcriptclusters = [
     "clariomdhuman",
-    "hta20",
     "hugene10st",
     "hugene11st",
     "hugene20st",
@@ -187,6 +186,9 @@ transcriptclusters = [
     "ragene20st",
     "ragene21st",
     "rta10"
+]
+probesets = [
+    "hta20"
 ]
 
 try:
@@ -206,6 +208,8 @@ for brainarray, pd in ba_pd.items():
 
         if brainarray in transcriptclusters:
             database = brainarray + "transcriptcluster"
+        elif brainarray in probesets:
+            database = brainarray + "probeset"
         else:
             database = brainarray
 
