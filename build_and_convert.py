@@ -170,21 +170,18 @@ ba_sp = {'bovgene10st': 'Bt',
  'zebgene11st': 'Dr',
  'zebrafish': 'Dr'
 }
-probesets = [
+transcriptclusters = [
     "clariomdhuman",
     "hta20",
-    "huex10st",
     "hugene10st",
     "hugene11st",
     "hugene20st",
     "hugene21st",
-    "moex10st",
     "mogene10st",
     "mogene11st",
     "mogene20st",
     "mogene21st",
     "mta10",
-    "raex10st",
     "ragene10st",
     "ragene11st",
     "ragene20st",
@@ -207,8 +204,8 @@ for brainarray, pd in ba_pd.items():
     try:
         tag = "convert/" + brainarray
 
-        if brainarray in probesets:
-            database = brainarray + "probeset"
+        if brainarray in transcriptclusters:
+            database = brainarray + "transcriptcluster"
         else:
             database = brainarray
 
