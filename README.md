@@ -1,13 +1,13 @@
 ![](https://i.imgur.com/GphUr2m.png)
 # identifier-refinery [![](https://zenodo.org/badge/DOI/10.5281/zenodo.1322711.svg)](https://zenodo.org/record/1322711)
 
-Tools and assets for easy and reproducable gene identifier conversion.
+Tools and assets for easy and reproducible gene identifier conversion.
 
 ## Methods
 
-This repository is used to build matricies which can convert between different gene identifiers.
+This repository is used to build matrices which can convert between different gene identifiers.
 
-These conversion matricies are built by:
+These conversion matrices are built by:
 
  * Randomly choosing raw CEL files from NCBI GEO for a given platform accession code (in `/cels`)
  * Reading the CEL header and joining Brainarray (e.g., `hgu133plus2hsensgprobe`) and Bioconductor (e.g., `hgu133plus2.db`) (x, y) coordinates
@@ -27,7 +27,7 @@ The `cels` directory contains raw CEL files taken from GEO. The list of supporte
 
 The conversion scripts are run on custom Docker images. 
 
-Two Dockerfiles are provided in this repository - `base` Docker image, which is used to install the quire R dependancies, and the `pd` image, which is used to build the required databases for a given platform.
+Two Dockerfiles are provided in this repository - `base` Docker image, which is used to install the required R dependencies, and the `pd` image, which is used to build the required databases for a given platform.
 
 ### Conversion Scripts
 
