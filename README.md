@@ -49,7 +49,7 @@ $ ./generate_matricies_from_scratch.sh celegans
 
 ## Identifiers
 
-Released assets in this repository are availble under the DOI, `10.5281/zenodo.1322711`, which can be seen on Zenodo [here](https://zenodo.org/record/1322711).
+Released assets in this repository are availble under the DOI, `10.5281/zenodo.1322711`, which can be seen on Zenodo [here](https://zenodo.org/record/1322711). This accession is up to date as of https://github.com/AlexsLemonade/identifier-refinery/commit/cace2849baf2666f21ec32f5eee6208d6ec19294.
 
 ## Related Projects
 
